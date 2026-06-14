@@ -717,6 +717,16 @@ body {
     padding: 13px;
 }
 
+#modal-role .modal {
+  position: relative;
+}
+
+#role-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
 .role-options {
     display: flex;
     flex-direction: column;

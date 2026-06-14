@@ -124,9 +124,11 @@ async function showRolePicker(id) {
     const snap = await getDoc(doc(db, 'lobbies', id));
     if (!snap.exists()) return;
     const data = snap.data();
-    $('role-p1-sub').textContent = (data.p1Name || 'Joueur 1') + ' — zone du bas';
-    $('role-p2-sub').textContent = (data.p2Name || 'Joueur 2') + ' — zone du haut';
+    $('role-p1-sub').textContent = 'Joueur 1 - ' + fmt(data.p1Hp) + ' PV';
+    $('role-p2-sub').textContent = 'Joueur 2 - ' + fmt(data.p2Hp) + ' PV';
     $('modal-role').style.display = 'flex';
+    $('role-p1').childNodes[0].textContent = data.p1Name || 'Joueur 1';
+    $('role-p2').childNodes[0].textContent = data.p2Name || 'Joueur 2';
 }
 
 function pickRole(role) {
@@ -134,6 +136,14 @@ function pickRole(role) {
     $('modal-role').style.display = 'none';
     enterLobby();
 }
+
+$('modal-role').addEventListener('click', e => {
+  if (e.target === $('modal-role')) $('modal-role').style.display = 'none';
+});
+
+$('role-close').addEventListener('click', () => {
+  $('modal-role').style.display = 'none';
+});
 
 $('role-p1').addEventListener('click', () => pickRole('p1'));
 $('role-p2').addEventListener('click', () => pickRole('p2'));
