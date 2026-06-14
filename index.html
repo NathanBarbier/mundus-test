@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mundus — Suivi de parties</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ══ HOME ══ -->
+<div id="home" class="page active">
+  <div class="home-header">
+    <img src="./images/logo.png" alt="Logo Mundus" style="width:min(340px,80vw);height:auto;display:block;margin:0 auto;" />
+    <p>Suivi de parties — Jeu de cartes</p>
+  </div>
+  <div class="create-section">
+    <input type="text" id="lobby-name-input" placeholder="Nom de la partie…" maxlength="40" />
+    <button class="btn" id="create-btn">Créer</button>
+  </div>
+  <div class="section-label">Parties en cours</div>
+  <div id="lobby-list"><div class="empty-state">Chargement…</div></div>
+</div>
+
+<!-- ══ LOBBY ══ -->
+<div id="lobby-page" class="page">
+  <div class="lobby-topbar">
+    <span class="lobby-topbar-name" id="lobby-title">—</span>
+    <div class="topbar-actions">
+      <button class="btn-outline" id="back-btn">← Accueil</button>
+      <button class="btn-danger" id="delete-lobby-btn">Supprimer</button>
+    </div>
+  </div>
+  <div id="spectator-banner" class="spectator-banner" style="display:none">👁 Mode spectateur</div>
+
+  <div class="player-zones">
+    <!-- Zone adversaire (haut) -->
+    <div class="player-zone" id="zone-opponent">
+      <div class="player-label" id="opponent-label">Adversaire</div>
+      <div class="player-name-display" id="opponent-name-display">Joueur 2</div>
+      <div class="hp-display" id="opponent-hp">100 000</div>
+      <button class="history-btn" id="history-btn-opponent">Historique</button>
+    </div>
+
+    <!-- Zone joueur (bas) -->
+    <div class="player-zone" id="zone-me">
+      <div class="player-label">Vous</div>
+      <div class="player-name-display editable" id="me-name-display">Joueur 1</div>
+      <div class="hp-display" id="me-hp">100 000</div>
+      <div class="hp-controls" id="me-controls">
+        <button class="hp-btn sub" id="btn-sub">−</button>
+        <input class="hp-input" id="me-amount" type="number" value="500" min="1" />
+        <button class="hp-btn add" id="btn-add">+</button>
+      </div>
+      <button class="history-btn" id="history-btn-me">Historique</button>
+    </div>
+  </div>
+</div>
+
+<!-- History panel -->
+<div class="history-overlay" id="history-overlay"></div>
+<div class="history-panel" id="history-panel">
+  <div class="history-header">
+    <h3 id="history-panel-title">Historique</h3>
+    <button class="history-close" id="history-close">✕</button>
+  </div>
+  <div class="history-tabs">
+    <button class="history-tab active" id="tab-p1">Joueur 1</button>
+    <button class="history-tab" id="tab-p2">Joueur 2</button>
+  </div>
+  <div class="history-list" id="history-list"></div>
+</div>
+
+<!-- Role picker -->
+<div class="modal-overlay" id="modal-role" style="display:none">
+  <div class="modal">
+    <h2>Rejoindre la partie</h2>
+    <p>Quel est votre rôle ?</p>
+    <div class="role-options">
+      <button class="role-btn" id="role-p1">Joueur 1 <span id="role-p1-sub">Zone du bas</span></button>
+      <button class="role-btn" id="role-p2">Joueur 2 <span id="role-p2-sub">Zone du haut</span></button>
+      <button class="role-btn" id="role-spectator">Spectateur <span>Lecture seule</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm delete -->
+<div class="modal-overlay" id="modal-confirm-delete" style="display:none">
+  <div class="modal">
+    <h2>Supprimer la partie ?</h2>
+    <p>Cette action est irréversible.</p>
+    <div class="modal-buttons">
+      <button class="btn" id="confirm-delete-yes">Supprimer</button>
+      <button class="btn-outline" id="confirm-delete-no">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!-- Warn delete (en cours) -->
+<div class="modal-overlay" id="modal-warn-delete" style="display:none">
+  <div class="modal">
+    <h2>Partie en cours</h2>
+    <p class="modal-warn">⚠️ La partie n'est pas encore terminée. Voulez-vous quand même la supprimer ?</p>
+    <div class="modal-buttons">
+      <button class="btn" id="warn-delete-yes">Continuer</button>
+      <button class="btn-outline" id="warn-delete-no">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit name -->
+<div class="modal-overlay" id="modal-name" style="display:none">
+  <div class="modal">
+    <h2>Modifier le nom</h2>
+    <input class="name-input" id="edit-name-input" type="text" maxlength="30" />
+    <div class="modal-buttons">
+      <button class="btn" id="edit-name-save">Enregistrer</button>
+      <button class="btn-outline" id="edit-name-cancel">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="./script.js"></script>
+</body>
+</html>
