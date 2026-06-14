@@ -201,7 +201,7 @@ async function changeHp(sign) {
     const field = myRole === 'p1' ? 'p1Hp' : 'p2Hp';
     const histField = myRole === 'p1' ? 'p1History' : 'p2History';
     const delta = sign * amt;
-    const newHp = (data[field] || 0) + delta;
+    const newHp = Math.max(0, (data[field] || 0) + delta);
     const oppField = myRole === 'p1' ? 'p2Hp' : 'p1Hp';
 
     const update = {
