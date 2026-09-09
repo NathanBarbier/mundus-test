@@ -101,10 +101,10 @@ createBtn.addEventListener('click', async () => {
     const ref = await addDoc(collection(db, 'lobbies'), {
         name,
         status: 'ongoing',
-        p1Hp: 100000, p2Hp: 100000,
+        p1Hp: 1000, p2Hp: 1000,
         p1Name: 'Joueur 1', p2Name: 'Joueur 2',
-        p1History: [{ hp: 100000, delta: 0, ts: Date.now() }],
-        p2History: [{ hp: 100000, delta: 0, ts: Date.now() }],
+        p1History: [{ hp: 1000, delta: 0, ts: Date.now() }],
+        p2History: [{ hp: 1000, delta: 0, ts: Date.now() }],
         createdAt: serverTimestamp()
     });
     lobbyNameInput.value = '';
